@@ -16,7 +16,7 @@ public class Vehicle {
         this.mileageSinceLastService = mileageSinceLastService;
     }
 
-    public boolean isNeedMainteance(){
+    public boolean isNeedsMaintenance(){
         return mileageSinceLastService >= 15000;
     }
     public void performMaintenance(){

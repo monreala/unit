@@ -11,14 +11,18 @@ public class Booking {
         this.customer = customer;
         this.vehicle = vehicle;
         this.rentDays = rentDays;
-        this.status = BookingStatus.PENDING; // По умолчанию бронь ожидает подтверждения
+        this.status = BookingStatus.PENDING;
     }
-    public boolean isValidBooking(){
-        if(rentDays > 0){return false;}
-        if(!customer.isValid()||!vehicle.isValid()){return false;}
-        if(vehicle.isValid()){return false;}
-        if(vehicle.getCategory()==VehicleCategory.PREMIUM){
-            if(customer.getAge()<25 || customer.getDrivingExperienceYears() < 5){return false;}
+    public boolean isValidBooking() {
+        if (rentDays <= 0) return false;
+        if (!customer.isValid() || !vehicle.isValid()) return false;
+        if (vehicle.isNeedsMaintenance()) return false;
+
+
+        if (vehicle.getCategory() == VehicleCategory.PREMIUM) {
+            if (customer.getAge() < 25 || customer.getDrivingExperienceYears() < 5) {
+                return false;
+            }
         }
         return true;
     }
